@@ -55,11 +55,11 @@ jobs:
           port: ${{ secrets.EC2_PORT }}
           script: |
             if [ "${{ github.ref_name }}" == "production" ]; then
-              sh deploy-production.sh
+              sh deploy-fproduction.sh
             elif [ "${{ github.ref_name }}" == "stage" ]; then
-              sh deploy-stage.sh
+              sh deploy-fstage.sh
             elif [ "${{ github.ref_name }}" == "qa" ]; then
-              sh deploy-qa.sh
+              sh deploy-fqa.sh
             elif [ "${{ github.ref_name }}" == "dev" ]; then
-              sh deploy-dev.sh
+              sh deploy-fdev.sh
             fi 
