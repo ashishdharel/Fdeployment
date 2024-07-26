@@ -62,4 +62,4 @@ jobs:
               sh deploy-qa.sh
             elif [ "${{ github.ref_name }}" == "dev" ]; then
               sh deploy-dev.sh
-            fi
+            fi 
