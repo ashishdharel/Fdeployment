@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.css'; // Import your CSS filee 
+import './App.css'; // Import your CSS file
 
 function App() {
     const [inputData, setInputData] = useState('');
@@ -10,14 +10,17 @@ function App() {
 
     useEffect(() => {
         fetchData(); // Initial fetch when component mounts
-        const interval = setInterval(fetchData, 5000); // Fetch data every 10 seconds
+
+        const interval = setInterval(fetchData, 10000); // Fetch data every 10 seconds
 
         return () => clearInterval(interval); // Clean up interval on component unmount
     }, []);
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getdata`);
+            const url = `${process.env.REACT_APP_BACKEND_URL}/api/getdata`;
+            console.log('Fetching data from:', url); // Debug log
+            const response = await axios.get(url);
             setStoredData(response.data);
             setError('');
         } catch (error) {
@@ -39,7 +42,9 @@ function App() {
         }
 
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/storedata`, { data: inputData });
+            const url = `${process.env.REACT_APP_BACKEND_URL}/api/storedata`;
+            console.log('Posting data to:', url); // Debug log
+            await axios.post(url, { data: inputData });
             setSuccessMessage('Data stored successfully');
             setInputData(''); // Clear input field after successful submission
             fetchData(); // Fetch updated data after submission
@@ -52,7 +57,9 @@ function App() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/deletedata/${id}`);
+            const url = `${process.env.REACT_APP_BACKEND_URL}/api/deletedata/${id}`;
+            console.log('Deleting data from:', url); // Debug log
+            await axios.delete(url);
             setSuccessMessage('Data deleted successfully');
             fetchData(); // Fetch updated data after deletion
             setError('');
@@ -73,7 +80,7 @@ function App() {
                     placeholder="Enter data to store"
                     className="input-field"
                 />
-                <button type="submit" className="store-button">Storee Data</button>
+                <button type="submit" className="store-button">Store Data</button>
             </form>
             {successMessage && <p className="success-message">{successMessage}</p>}
             {error && <p className="error-message">{error}</p>}
@@ -82,7 +89,7 @@ function App() {
                 {storedData.map((item) => (
                     <div key={item.id} className="data-item">
                         <p>{item.data}</p>
-                        <button onClick={() => handleDelete(item.id)}>Deletee</button>
+                        <button onClick={() => handleDelete(item.id)}>Delete</button>
                     </div>
                 ))}
             </div>
@@ -91,3 +98,4 @@ function App() {
 }
 
 export default App;
+
