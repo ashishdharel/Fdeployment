@@ -82,7 +82,7 @@ function App() {
                 {storedData.map((item) => (
                     <div key={item.id} className="data-item">
                         <p>{item.data}</p>
-                        <button onClick={() => handleDelete(item.id)}>Delete</button>
+                        <button onClick={() => handleDelete(item.id)}>Deletee</button>
                     </div>
                 ))}
             </div>
