@@ -73,7 +73,7 @@ function App() {
                     placeholder="Enter data to store"
                     className="input-field"
                 />
-                <button type="submit" className="store-button">Store Data</button>
+                <button type="submit" className="store-button">Storee Data</button>
             </form>
             {successMessage && <p className="success-message">{successMessage}</p>}
             {error && <p className="error-message">{error}</p>}
